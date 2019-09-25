@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
- /*
+import java.util.List;
+import java.util.stream.Collectors;
+
+/*
  * @Repository annotation is used to indicate that the class provides the mechanism for
  * storage, retrieval, search, update and delete operation on objects.
  */
@@ -38,5 +41,19 @@ public class StudentDAO {
     public int updatePhone(int roll, String newPhone) {
         String query="UPDATE student SET phone=? WHERE roll=?";
         return jdbcTemplate.update(query,newPhone,roll);
+    }
+
+    public List<Student> getAllStudents() {
+        String query="SELECT * FROM student";
+        return jdbcTemplate.query(query,(resultSet, i) ->
+                new Student(resultSet.getInt("roll"),resultSet.getString("name"),resultSet.getString("phone")))
+                .stream()
+                .collect(Collectors.toList());
+    }
+
+    public Student getStudentByRoll(int roll) {
+        String query="SELECT * FROM student WHERE roll=?";
+        return jdbcTemplate.queryForObject(query,new Integer[]{roll},(resultSet, i) ->
+                new Student(resultSet.getInt("roll"), resultSet.getString("name"), resultSet.getString("phone")));
     }
 }

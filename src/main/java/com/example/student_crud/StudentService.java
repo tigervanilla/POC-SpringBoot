@@ -3,6 +3,9 @@ package com.example.student_crud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 public class StudentService {
 
@@ -22,5 +25,12 @@ public class StudentService {
             return studentDAO.updatePhone(roll,student.getPhone());
         }
         return -1;
+    }
+
+    public List<Student> getStudent(Integer roll) {
+        if (roll!=null){
+            return Arrays.asList(studentDAO.getStudentByRoll(roll));
+        }
+        return studentDAO.getAllStudents();
     }
 }

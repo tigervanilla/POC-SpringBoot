@@ -3,7 +3,7 @@ package com.example.student_crud;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Student {
-    @JsonProperty("id") private int roll;
+    @JsonProperty("roll") private int roll;
     @JsonProperty("name") private String name;
     @JsonProperty("phone") private String phone;
 

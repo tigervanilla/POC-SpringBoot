@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/student")
@@ -23,5 +24,10 @@ public class StudentController {
                                            @Valid @NotNull @RequestBody Student student) {
         System.out.println("This is it->"+student.getName()+student.getPhone()+student.getRoll());
         return studentService.updateStudent(roll,student);
+    }
+
+    @GetMapping
+    public @ResponseBody List<Student> getStudent(@RequestParam(value = "roll", required = false) Integer roll) {
+        return studentService.getStudent(roll);
     }
 }
