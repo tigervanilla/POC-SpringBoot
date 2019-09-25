@@ -21,12 +21,7 @@ public class StudentDAO {
     private JdbcTemplate jdbcTemplate;
 
     public int insertStudent(Student student) {
-        String query="INSERT INTO student(id,name,phone) VALUES(?,?,?)";
-        try {
-            return jdbcTemplate.update(query,student.getRoll(),student.getName(),student.getPhone());
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        return -1;
+        String query="INSERT INTO student(roll,name,phone) VALUES(?,?,?)";
+        return jdbcTemplate.update(query,student.getRoll(),student.getName(),student.getPhone());
     }
 }
