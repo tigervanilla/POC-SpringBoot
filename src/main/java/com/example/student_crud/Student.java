@@ -1,14 +1,16 @@
 package com.example.student_crud;
 
-public class Student {
-    private int roll;
-    private String name;
-    private String email;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public Student(int roll, String name, String email) {
+public class Student {
+    @JsonProperty("id") private int roll;
+    @JsonProperty("name") private String name;
+    @JsonProperty("phone") private String phone;
+
+    public Student(int roll, String name, String phone) {
         this.roll=roll;
         this.name=name;
-        this.email=email;
+        this.phone=phone;
     }
 
     public int getRoll() {
@@ -19,8 +21,8 @@ public class Student {
         return name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
     public void setRoll(int roll) {
@@ -31,8 +33,8 @@ public class Student {
         this.name=name;
     }
 
-    public void setEmail(String email) {
-        this.email=email;
+    public void setPhone(String phone) {
+        this.phone=phone;
     }
 
 }
