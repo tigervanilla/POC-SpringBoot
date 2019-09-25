@@ -20,14 +20,19 @@ public class StudentController {
     }
 
     @PutMapping(path = "{roll}")
-    public @ResponseBody int updateStudent(@PathVariable(value = "roll", required = true) Integer roll,
+    public @ResponseBody int updateStudent(@Valid @NotNull @PathVariable(value = "roll", required = true) Integer roll,
                                            @Valid @NotNull @RequestBody Student student) {
         System.out.println("This is it->"+student.getName()+student.getPhone()+student.getRoll());
         return studentService.updateStudent(roll,student);
     }
 
     @GetMapping
-    public @ResponseBody List<Student> getStudent(@RequestParam(value = "roll", required = false) Integer roll) {
+    public @ResponseBody List<Student> getStudent(@Valid @RequestParam(value = "roll", required = false) Integer roll) {
         return studentService.getStudent(roll);
+    }
+
+    @DeleteMapping
+    public @ResponseBody int deleteStudent(@Valid @NotNull @RequestParam(value = "roll", required = true) Integer roll) {
+        return studentService.deleteStudent(roll);
     }
 }

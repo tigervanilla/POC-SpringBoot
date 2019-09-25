@@ -33,4 +33,11 @@ public class StudentService {
         }
         return studentDAO.getAllStudents();
     }
+
+    public int deleteStudent(Integer roll){
+        if(roll==null) {
+            return -1;
+        }
+        return studentDAO.deleteStudentByRoll(roll);
+    }
 }

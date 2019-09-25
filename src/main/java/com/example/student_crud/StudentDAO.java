@@ -56,4 +56,9 @@ public class StudentDAO {
         return jdbcTemplate.queryForObject(query,new Integer[]{roll},(resultSet, i) ->
                 new Student(resultSet.getInt("roll"), resultSet.getString("name"), resultSet.getString("phone")));
     }
+
+    public int deleteStudentByRoll(int roll) {
+        String query="DELETE FROM student WHERE roll=?";
+        return jdbcTemplate.update(query,roll);
+    }
 }
