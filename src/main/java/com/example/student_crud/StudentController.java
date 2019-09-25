@@ -17,4 +17,11 @@ public class StudentController {
     public @ResponseBody int insertStudent(@Valid @NotNull @RequestBody Student student) {
         return studentService.insertStudent(student);
     }
+
+    @PutMapping(path = "{roll}")
+    public @ResponseBody int updateStudent(@PathVariable(value = "roll", required = true) Integer roll,
+                                           @Valid @NotNull @RequestBody Student student) {
+        System.out.println("This is it->"+student.getName()+student.getPhone()+student.getRoll());
+        return studentService.updateStudent(roll,student);
+    }
 }
