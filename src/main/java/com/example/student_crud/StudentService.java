@@ -34,10 +34,10 @@ public class StudentService {
         return studentDAO.getAllStudents();
     }
 
-    public int deleteStudent(Integer roll){
+    public String deleteStudent(Integer roll){
         if(roll==null) {
-            return -1;
+            return "Invalid roll number";
         }
-        return studentDAO.deleteStudentByRoll(roll);
+        return "Records removed: " + studentDAO.deleteStudentByRoll(roll);
     }
 }

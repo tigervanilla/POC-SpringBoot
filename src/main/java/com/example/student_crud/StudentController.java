@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     @DeleteMapping
-    public @ResponseBody int deleteStudent(@Valid @NotNull @RequestParam(value = "roll", required = true) Integer roll) {
+    public @ResponseBody String deleteStudent(@Valid @NotNull @RequestParam(value = "roll", required = true) Integer roll) {
         return studentService.deleteStudent(roll);
     }
 }
