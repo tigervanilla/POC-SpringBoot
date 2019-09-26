@@ -1,10 +1,12 @@
 package com.example.student_crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,12 @@ public class StudentController {
 
     @GetMapping
     public @ResponseBody List<Student> getStudent(@Valid @RequestParam(value = "roll", required = false) Integer roll) {
-        return studentService.getStudent(roll);
+        try {
+            return studentService.getStudent(roll);
+        } catch (EmptyResultDataAccessException e) {
+            return Arrays.asList();
+        }
+
     }
 
     @DeleteMapping
