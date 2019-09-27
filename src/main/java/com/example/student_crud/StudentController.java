@@ -17,19 +17,23 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping
-    public @ResponseBody int insertStudent(@Valid @NotNull @RequestBody Student student) {
+    public int insertStudent(@Valid @NotNull @RequestBody Student student) {
         return studentService.insertStudent(student);
     }
 
     @PutMapping(path = "{roll}")
-    public @ResponseBody int updateStudent(@Valid @NotNull @PathVariable(value = "roll", required = true) Integer roll,
-                                           @Valid @NotNull @RequestBody Student student) {
-        System.out.println("This is it->"+student.getName()+student.getPhone()+student.getRoll());
-        return studentService.updateStudent(roll,student);
+    public int updateStudent(@Valid @NotNull @PathVariable(value = "roll", required = true) Integer roll,
+                             @Valid @NotNull @RequestBody Student student) {
+        try {
+            System.out.println("This is it->" + student.getName() + student.getPhone() + student.getRoll());
+            return studentService.updateStudent(roll, student);
+        } catch (Exception e) {
+            throw new RequestErrorHandler.StudentServiceException("failed to update user ");
+        }
     }
 
     @GetMapping
-    public @ResponseBody List<Student> getStudent(@Valid @RequestParam(value = "roll", required = false) Integer roll) {
+    public List<Student> getStudent(@Valid @RequestParam(value = "roll", required = false) Integer roll) {
         try {
             return studentService.getStudent(roll);
         } catch (EmptyResultDataAccessException e) {
@@ -39,7 +43,7 @@ public class StudentController {
     }
 
     @DeleteMapping
-    public @ResponseBody String deleteStudent(@Valid @NotNull @RequestParam(value = "roll", required = true) Integer roll) {
+    public String deleteStudent(@Valid @NotNull @RequestParam(value = "roll", required = true) Integer roll) {
         return studentService.deleteStudent(roll);
     }
 }
